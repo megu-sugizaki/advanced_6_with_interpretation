@@ -1,0 +1,49 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'users/info', user: @book.user %>
+      <h2 class="mt-3">New book</h2>
+      <%= render 'form', book: Book.new %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Book detail</h2>
+  		<table class='table'>
+  		  <tr>
+          <td><%= link_to(@book.user) do %>
+            <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
+            <%= @book.user.name %>
+            <% end %>
+          </td>
+          <td><%= link_to @book.title, @book %></td>
+          <td><%= @book.body %></td>
+          <td class=<%= "favorite-" + @book.id.to_s %> >
+            <!--to_sをつけることで文字列のオブジェクトに変換。class名は非同期通信の記載で必要になるものだが、加えてdeveloper toolでclass名の表示が出るようにfavoriteに@book.idをたす形で記載。-->
+            <!--%で囲むことで、ruby/railsの記述であることを明示。その中で文字列として@book.idを表示させたいためto_sを記載-->
+            <%= render "favorites/btn", book: @book %>
+          </td>
+          <td class="book-comments-counter">
+            <%= render "book_comments/counter", book: @book %>
+          </td>
+          <% if @book.user == current_user %>
+          <!--@bookはBook.new。新しいbookを作ったuserがログインしているuserである場合のみeditとdestroyのリンクを表示できる。-->
+            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
+            <!--class名にpathを指定しているのは、developer toolのaタグに表示したいため記載を行っている。なくてもOK-->
+            <!--#以降の記載は、""で囲んで文字列になってしまっている。その中で、#{}内は変数として（例外的に？）表示させたい時に用いる記述。-->
+            <!--アプリケーションを完成させよう4章の「indexにshowへのリンクを作る」の記述を参考にすると良い-->
+            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+            <!--pathの指定がない→pathを書いていない時、アプリケーションは一番近いpathを探すことになっている。今回でいえばbook_pathやbooks_pathをまず探してくる。-->
+            <!--今回method: :deleteの記載があるためbook_pathのdeleteメソッドからもってくることになるが、読み手には不透明のためしっかりpathは記述するのがベスト。-->
+          <% end %>
+        </tr>
+      </table>
+      
+      <div class="book-comments-index">
+        <%= render "book_comments/index", book: @book %>
+      </div>
+      
+      <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
+      
+    </div>
+  </div>
+</div>

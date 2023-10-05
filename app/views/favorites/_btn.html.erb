@@ -1,0 +1,14 @@
+<% if book.favorited_by?(current_user) %>
+<!--もし現在ログインしているユーザーのuser.idがすでにfavoriteテーブルにあるならば＝すでにいいねしているならば-->
+  <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= book.favorites.count %> いいね
+  <% end %>
+  <!--book_favorites_pathは2つ。deleteのpathを指定。(book)はcontrollerで定義したローカル変数で、特定の本を探す。→特定の本のいいねを削除。aria-hiddenは音声読み上げ機能でアイコンを読まないようにしてくれる機能-->
+<% else %>
+  <%= link_to book_favorites_path(book), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= book.favorites.count %> いいね
+  <% end %>
+  <!--2つあるbook_favorites_pathのうち、postを指定。-->
+<% end %>
