@@ -1,6 +1,7 @@
 <% if book.favorited_by?(current_user) %>
 <!--もし現在ログインしているユーザーのuser.idがすでにfavoriteテーブルにあるならば＝すでにいいねしているならば-->
   <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+  <!--remote: :trueで非同期通信に設定。-->
     <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
     <%= book.favorites.count %> いいね
   <% end %>
@@ -10,5 +11,5 @@
     <i class="fas fa-heart" aria-hidden="true"></i>
     <%= book.favorites.count %> いいね
   <% end %>
-  <!--2つあるbook_favorites_pathのうち、postを指定。-->
+  <!--2つあるbook_favorites_pathのうち、postを指定。book→favorite controllerでは-->
 <% end %>

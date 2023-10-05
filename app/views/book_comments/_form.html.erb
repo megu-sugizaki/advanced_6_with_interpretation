@@ -1,4 +1,8 @@
 <%= form_with(model:[book, book_comment], local: false) do |f| %>
+<!--local: falseで非同期通信を実装。モデルについてはbookモデルとbook_commentsモデルの両方を呼び出せるようにしている。-->
+<!--bookについてはshowページでbook.find(params[:id])に渡すため。book_commentsはshowページでBookComment.newに渡すため。コメントをするbookを探してcommentを作成するというイメージ-->
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100 comment-textarea" %>
+  <!--text_areaは複数行を記入できる。その中でも行は5行と指定。placeholderでコメント記載前に「コメントをここに」と表示させる。コメント欄の横幅は100 , class名はおそらく任意でcomment-textareaとしている-->
   <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+  <!--btn-lgはlgの画面幅に対応。btn-baseは意味わからない。消しても違いがよくわからない。pull-rightはfloat:rightのこと。float = 縦並びになっていた要素を右寄せにする方法。消しても特に変わらない。むしろ左によってる -->
 <% end %>

@@ -21,6 +21,7 @@
             <!--to_sをつけることで文字列のオブジェクトに変換。class名は非同期通信の記載で必要になるものだが、加えてdeveloper toolでclass名の表示が出るようにfavoriteに@book.idをたす形で記載。-->
             <!--%で囲むことで、ruby/railsの記述であることを明示。その中で文字列として@book.idを表示させたいためto_sを記載-->
             <%= render "favorites/btn", book: @book %>
+            <!--本の情報を渡しているにすぎない。いいねが押されようが押されまいがその本の情報をview（ブラウザ）に表示させるための記載。アクション自体は関係ない。-->
           </td>
           <td class="book-comments-counter">
             <%= render "book_comments/counter", book: @book %>

@@ -9,15 +9,23 @@
   </thead>
   <tbody>
     <% books.each do |book| %>
+    <!--booksテーブルの中でeach文を実行。変数としてbookを定義。-->
       <tr>
         <td><%= link_to(book.user) do %>
           <%= image_tag book.user.get_profile_image, size:'50x50' %>
+          <!--画像を挿入するのでimage_tagをつけている。book変数（bookテーブル）のuserモデルの中から(userモデルに記述している）get_profile_imageを呼び出してくる。-->
           <% end %>
         </td>
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
+        <!--class名にpathを指定しているのは、developer toolのaタグに表示したいため記載を行っている。なくてもOK-->
+        <!--#以降の記載は、""で囲んで文字列になってしまっている。その中で、#{}内は変数として（例外的に？）表示させたい時に用いる記述。-->
+        <!--アプリケーションを完成させよう4章の「indexにshowへのリンクを作る」の記述を参考にすると良い-->
         <td><%= book.body %></td>
         <td class=<%= "favorite-" + book.id.to_s %> >
+          <!--to_sをつけることで文字列のオブジェクトに変換。class名は非同期通信の記載で必要になるものだが、加えてdeveloper toolでclass名の表示が出るようにfavoriteに@book.idをたす形で記載。-->
+          <!--%で囲むことで、ruby/railsの記述であることを明示。その中で文字列として@book.idを表示させたいためto_sを記載-->
             <%= render "favorites/btn", book: book %>
+            <!--indexはURLでidをとらないので、showページのようにBook.findの記載ができない。なので、each文でとってくることにして、bookというローカル変数を定義している。ここで渡すのもbookというローカル変数。-->
         </td>
         <td><%= render "book_comments/counter", book: book %></td>
       </tr>

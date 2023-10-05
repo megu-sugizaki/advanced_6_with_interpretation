@@ -1,3 +1,6 @@
-$('.favorite-<%= @favorite.book_id %>').html("<%= j(render 'favorites/btn',  book: @favorite.book ) %>")
+$('.favorite-<%= @book.id %>').html("<%= j(render 'favorites/btn',  book: @book ) %>")
 
-<!--非同期通信用の-->
+<!--非同期通信用のコード-->
+<!--htmlの左側にはviewページで作成したclass名を記載。例えば、@book.idが1ならfavoriteのidも1になるというclass名の-->
+<!--左側にはrenderを行って、favoriteの部分テンプレートを呼び出し。その中でbookはfavorite controllerの@book= Book.find(params[:id])をインスタンス変数にしている-->
+<!--books controllerのshowのviewページはただ@bookの情報を表示させるための記述。対してこのreplace~の記載は実際にいいねが押された時のアクションを呼び出すための記述が行われている。-->

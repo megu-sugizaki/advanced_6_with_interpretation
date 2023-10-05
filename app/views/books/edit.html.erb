@@ -1,12 +1,15 @@
 <div class='container'>
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <!--marginの横はauto 、responsiveがsmの時は横幅が0-->
+      <!--marginの横はauto 、responsiveがsmの時は横幅が0, paddingは5(画面幅を小さくするとpaddingが入るのが分かる)-->
   		<h1>Editing Book</h1>
     	<%= render 'layouts/errors', obj: @book %>
     	<!--renderでlayoutsのエラーの記載を呼び出している。objにはインスタンス変数@bookを代入。特定のbookを探してエラーの表示を行うようにしている。-->
   		<%= render 'form', book: @book %>
   		<%= link_to 'Show', @book, class: "book_#{@book.id}" %> |
+  		<!--class名にpathを指定しているのは、developer toolのaタグに表示したいため記載を行っている。なくてもOK-->
+      <!--#以降の記載は、""で囲んで文字列になってしまっている。その中で、#{}内は変数として（例外的に？）表示させたい時に用いる記述。-->
+      <!--アプリケーションを完成させよう4章の「indexにshowへのリンクを作る」の記述を参考にすると良い-->
   		<%= link_to 'Back', books_path, class: "back" %>
   </div>
 </div>

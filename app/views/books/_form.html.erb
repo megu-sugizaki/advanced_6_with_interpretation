@@ -1,11 +1,19 @@
 <%= form_with model:book,local:true do |f| %>
+<!--bookというローカル変数に対してformを作る、という記述。showページではBook.newを定義。indexでもcontrollerで@book = Book.newを定義。local:trueにしているのは、動機通信を行ってdbに反映したいから-->
+<!--form_withで作られたフォームに入力された情報は、その引数（@book）が、情報を持っているかどうかで、createアクションかupdateアクションかのどちらに送信されるかが決まる-->
+<!--引数@postがnewメソッドで新たに作成され（@book = Book.new）、何も情報を持っていなければ、自動でcreateアクションに送信される。-->
+<!--引数@bookがfindメソッドで作成され（例 @book = Book.find(params[:id])）、すでに何かしらの情報を持っているのであれば、自動的にupdateアクションに送信される。-->
   <div class="form-group">
     <%= f.label :title %>
+    <!--form.labelは、入力するフォームの名前を決めることができる。今回はそのままTitleと名前がついているが、form.label :title, "タイトル"（％記述は省略）とすることで「タイトル」と表示が出る-->
+    
     <%= f.text_field :title, class: 'form-control book_title' %>
+    <!--text_fieldは、1行のみの入力フォーム-->
   </div>
   <div class="form-group">
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
+    <!--text_areaは、複数行でも入力可能な入力フォーム-->
   </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
